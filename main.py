@@ -9,9 +9,10 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Cargar archivos CSV
-carta = pd.read_csv('/mnt/data/lista_carta.csv')  # Cargar carta del restaurante
-distritos = pd.read_csv('/mnt/data/distritos_reparto.csv')  # Cargar distritos de reparto
-historial = pd.read_csv('/mnt/data/historial_pedido.csv')  # Historial de pedidos
+carta = pd.read_csv('mnt/data/lista_carta.csv')  # Cargar carta del restaurante
+distritos = pd.read_csv('mnt/data/distritos_reparto.csv')  # Cargar distritos de reparto
+historial = pd.read_csv('mnt/data/historial_pedido.csv')  # Historial de pedidos
+#https://raw.githubusercontent.com/Fx2048/NLP/refs/heads/main/mnt/data/distritos_reparto.csv
 
 # Función para mostrar la carta
 def mostrar_carta():
