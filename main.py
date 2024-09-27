@@ -1,7 +1,6 @@
 import os
 import streamlit as st
-import openai
-import openai.error  # Importa la excepción para manejar los errores de OpenAI
+import openai  # Solo necesitas importar openai
 from dotenv import load_dotenv
 
 # Cargar variables de entorno
@@ -24,7 +23,7 @@ def generar_respuesta(mensaje):
         )
         return response.choices[0].message["content"]
     
-    except openai.error.OpenAIError as e:
+    except openai.OpenAIError as e:  # Utiliza openai.OpenAIError en lugar de openai.error.OpenAIError
         return f"Error en la API: {str(e)}"
 
 # Interfaz en Streamlit
