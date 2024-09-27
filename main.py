@@ -16,7 +16,8 @@ historial = pd.read_csv('mnt/data/historial_pedido.csv')  # Historial de pedidos
 
 # Función para mostrar la carta
 def mostrar_carta():
-    return carta.to_string(index=False)
+    st.subheader("Carta del Restaurante")  # Título para la sección de la carta
+    st.dataframe(carta)
 
 # Verificar si el distrito está disponible para reparto
 def verificar_distrito(distrito):
