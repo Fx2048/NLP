@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-import openai  # Solo necesitas importar openai
+import openai
 from dotenv import load_dotenv
 
 # Cargar variables de entorno
@@ -15,7 +15,7 @@ def generar_respuesta(mensaje):
     ]
     
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.completions.create(  # Cambia el método para la nueva API
             model="gpt-3.5-turbo",
             messages=messages,
             temperature=0.7,
@@ -23,7 +23,7 @@ def generar_respuesta(mensaje):
         )
         return response.choices[0].message["content"]
     
-    except openai.OpenAIError as e:  # Utiliza openai.OpenAIError en lugar de openai.error.OpenAIError
+    except openai.OpenAIError as e:
         return f"Error en la API: {str(e)}"
 
 # Interfaz en Streamlit
@@ -37,4 +37,6 @@ mensaje_usuario = st.text_input("Mensaje:")
 if st.button("Enviar"):
     respuesta = generar_respuesta(mensaje_usuario)
     st.write(f"Respuesta: {respuesta}")
+
+
 
