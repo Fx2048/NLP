@@ -21,7 +21,7 @@ def mostrar_carta():
 
 # Verificar si el distrito está disponible para reparto
 def verificar_distrito(distrito):
-    return distrito in distritos['Distrito'].values
+    return distrito in distritos['Nombre del Distrito'].values
 
 # Guardar el pedido en el historial
 def guardar_pedido(pedido):
