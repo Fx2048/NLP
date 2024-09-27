@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 import openai
+import openai.error  # Importa la excepción para manejar los errores de OpenAI
 from dotenv import load_dotenv
 
 # Cargar variables de entorno
