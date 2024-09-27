@@ -7,15 +7,28 @@ from dotenv import load_dotenv
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+# Moderación de OpenAI
+def moderar_contenido(input_text):
+    response = openai.Moderation.create(input=input_text)
+    results = response['results'][0]
+    
+    if results['flagged']:
+        return f"Mensaje moderado: {', '.join([k for k, v in results['categories'].items() if v])}"
+    return None
+
 # Generar respuesta del chatbot
 def generar_respuesta(mensaje):
+    moderacion = moderar_contenido(mensaje)
+    if moderacion:
+        return moderacion
+    
     messages = [
         {"role": "system", "content": "Eres un asistente que toma pedidos para un restaurante."},
         {"role": "user", "content": mensaje}
     ]
     
     try:
-        response = openai.completions.create(  # Cambia el método para la nueva API
+        response = openai.ChatCompletion.create(  # Este es el método correcto
             model="gpt-3.5-turbo",
             messages=messages,
             temperature=0.7,
@@ -23,7 +36,7 @@ def generar_respuesta(mensaje):
         )
         return response.choices[0].message["content"]
     
-    except openai.OpenAIError as e:
+    except openai.error.OpenAIError as e:
         return f"Error en la API: {str(e)}"
 
 # Interfaz en Streamlit
