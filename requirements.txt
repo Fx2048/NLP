@@ -1,1 +1,3 @@
 Openai
+dotenv
+streamlit
